@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('videogames_purchased', function (Blueprint $table) {
+        Schema::create('DetalleOrden', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_purchased');
-            $table->unsignedBigInteger('id_videogame');
+            $table->unsignedBigInteger('id_Orden');
+            $table->unsignedBigInteger('id_Producto');
+            $table->string('Cantidad');
+            $table->float('PrecioUnitario');
             $table->timestamps();
 
-            $table->foreign('id_purchased')->references('id')->on('purchased')->onDelete('cascade');
-            $table->foreign('id_videogame')->references('id')->on('videogames')->onDelete('cascade');
+            $table->foreign('id_Orden')->references('id')->on('OrdenesCompra')->onDelete('cascade');
+            $table->foreign('id_Producto')->references('id')->on('Producto')->onDelete('cascade');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book_lendings');
+        Schema::dropIfExists('DetalleOrden');
     }
 };
